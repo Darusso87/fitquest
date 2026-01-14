@@ -107,7 +107,7 @@ export default function OnboardingPage() {
       timeline: data.timeline!,
       trainingDays: data.trainingDays!,
       minutesPerSession: data.minutesPerSession!,
-      equipment: 'none', // HOME WORKOUT APP - No equipment needed!
+      homeSetup: 'none', // HOME WORKOUT APP - No equipment needed!
       limitations: data.limitations!,
       foodsLike: data.foodsLike!,
       foodsDislike: data.foodsDislike || [],

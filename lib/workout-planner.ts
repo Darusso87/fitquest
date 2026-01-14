@@ -6,7 +6,7 @@ export function generateWorkoutPlan(
   weekNumber: number,
   dayInWeek: number
 ): Workout {
-  const { experience, goalType, minutesPerSession, equipment, limitations, trainingDays } = onboarding;
+  const { experience, goalType, minutesPerSession, homeSetup, limitations, trainingDays } = onboarding;
   
   // Determine if this is a deload week (every 4th week for 8+ week plans)
   const isDeloadWeek = onboarding.timeline >= 8 && weekNumber % 4 === 0;
@@ -15,7 +15,7 @@ export function generateWorkoutPlan(
   const split = determineSplit(trainingDays, dayInWeek);
   
   // Select exercises based on equipment and focus
-  const exercises = selectExercises(equipment, split, experience, limitations, isDeloadWeek);
+  const exercises = selectExercises(homeSetup, split, experience, limitations, isDeloadWeek);
   
   // Apply progressive overload
   const progressedExercises = applyProgression(exercises, weekNumber, experience, goalType, isDeloadWeek);
@@ -61,7 +61,7 @@ function determineSplit(trainingDays: number, dayInWeek: number): string {
 }
 
 function selectExercises(
-  equipment: string,
+  homeSetup: string,
   split: string,
   experience: string,
   limitations: OnboardingData['limitations'],
@@ -69,20 +69,21 @@ function selectExercises(
 ): Exercise[] {
   const exercises: Exercise[] = [];
   
-  // Get exercise pool based on equipment
+  // Get exercise pool based on equipment (all home-based now)
   let pool: any;
-  switch (equipment) {
+  switch (homeSetup) {
     case 'none':
       pool = EXERCISE_LIBRARY.bodyweight;
       break;
-    case 'dumbbells':
+    case 'resistance_bands':
       pool = { ...EXERCISE_LIBRARY.bodyweight, ...EXERCISE_LIBRARY.dumbbell };
       break;
-    case 'home gym':
-    case 'full gym':
-      pool = { ...EXERCISE_LIBRARY.bodyweight, ...EXERCISE_LIBRARY.dumbbell, ...EXERCISE_LIBRARY.gym };
+    case 'light_dumbbells':
+      // Light dumbbells can use dumbbell exercises
+      pool = { ...EXERCISE_LIBRARY.bodyweight, ...EXERCISE_LIBRARY.dumbbell };
       break;
     default:
+      // Default to bodyweight only
       pool = EXERCISE_LIBRARY.bodyweight;
   }
   
