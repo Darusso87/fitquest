@@ -34,10 +34,10 @@ export function computeTargets(onboarding: OnboardingData, currentWeight: number
 
   return {
     waterMl,
-    sleepTargetHours,
-    stepsTarget,
-    proteinTargetG,
-    veggiesTarget,
+    sleepHours: sleepTargetHours,
+    steps: stepsTarget,
+    proteinG: proteinTargetG,
+    veggiesServings: veggiesTarget,
   };
 }
 
