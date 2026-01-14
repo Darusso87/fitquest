@@ -62,7 +62,7 @@ export default function PlanPage() {
             <li>• Weekly progressive overload</li>
             <li>• {save.plan.timelineWeeks >= 8 ? 'Deload every 4th week' : 'No deload weeks'}</li>
             <li>• Split: {save.onboarding.trainingDays} days/week</li>
-            <li>• Equipment: {save.onboarding.equipment}</li>
+            <li>• Home Setup: {save.onboarding.homeSetup === 'none' ? 'No equipment needed' : save.onboarding.homeSetup.replace('_', ' ')}</li>
             <li>• Goal: {save.onboarding.goalType}</li>
           </ul>
         </div>
